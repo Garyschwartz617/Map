@@ -1,4 +1,26 @@
-.App {
+.leaflet-container {
+  width: 100%;
+  height: 100vh;
+}
+
+.bttn {
+  z-index: 999;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+
+}
+
+.coordinates{
+  z-index: 999;
+  position: absolute;
+  Bottom: 5px;
+  right: 210px;
+  background-color: gray;
+}
+
+
+/* .App {
   text-align: center;
 }
 
@@ -35,4 +57,4 @@
   to {
     transform: rotate(360deg);
   }
-}
+} */
