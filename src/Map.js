@@ -2,7 +2,7 @@ import { useState,useEffect} from "react";
 import { MapContainer, TileLayer, useMapEvents, Polygon, LayersControl } from 'react-leaflet'
 import './App.css';
 import AddMarkerToClick from "./AddMarkerToClick";
-import Sensor from "./sensor";
+import Sensor from "./Sensor";
 const Map = () => {
 
     const [lat, setLat] = useState(32.0853);
@@ -37,12 +37,6 @@ const Map = () => {
         return null;
       }
 
-    const polygon = [
-        [32.1, 34.7818],
-        [32.0853, 34.7918],
-        [32.0853, 34.8018],
-      ]
-    const purpleOptions = { color: 'purple' }  
   
     useEffect(() => {
       });
@@ -80,7 +74,7 @@ const Map = () => {
           subdomains= {domain}
         />
       </LayersControl.BaseLayer>
-       <LayersControl.BaseLayer checked name="OpenStreetMap.Hybrid">
+       <LayersControl.BaseLayer checked name="GoogleMap.Hybrid">
         <TileLayer
           attribution='&copy; <a href="https://maps.google.com/">GoogleMaps</a>" '
           url="http://{s}.google.com/vt/lyrs=s,h&x={x}&y={y}&z={z}"
@@ -90,8 +84,7 @@ const Map = () => {
         </LayersControl>
         <AddMarkerToClick />
         <MyComponent />
-        <Sensor />
-        <Polygon pathOptions={purpleOptions} positions={polygon} />
+        {/* <Sensor /> */}
       </MapContainer>
       {/* <button id='hello' className='bttn' onClick={handleClick}>Hello</button> */}
       <div className='coordinates'>Lattitude-{latit} , Longitude-{langi}</div>  

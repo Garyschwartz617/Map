@@ -1,29 +1,32 @@
-import { SemiCircle, SemiCircleMarker } from 'react-leaflet-semicircle';
+import { SemiCircle,  } from 'react-leaflet-semicircle';
 import { useState, useRef, useMemo, useCallback} from "react";
 import { Popup,useMapEvents } from 'react-leaflet'
 import React from "react";
 
 
 
-function Sensor() {
-    let center = [32.0853, 34.7818]
+function Sensor({center}) {
+    // let center = [32.08, 34.78]
     const semiCircleRef = React.useRef();
     const [draggable, setDraggable] = useState(false)
     const [position, setPosition] = useState(center)
-    const markerRef = useRef(null)
     const [place,setPlace] = useState()
+    console.log(center)
+
     // const eventHandlers = useMemo(
-    //   () => ({
-    //     dragend() {
-    //       const marker = semiCircleRef.current
-    //       console.log(marker)
-    //       if (marker != null) {
-    //         setPosition(marker.getLatLng())
-    //       }
-    //     },
-    //   }),
-    //   [],
-    // )
+    //     () => ({
+    //         dragend() {
+    //         const marker = semiCircleRef.current
+    //         console.log(marker)
+    //         if (marker != null) {
+    //             setPosition(marker.getLatLng())
+    //         }
+    //         },
+    //     }),
+    //     [],
+    //     )
+
+
     const toggleDraggable = useCallback(() => {
       setDraggable((d) => !d)
       const marker = semiCircleRef.current
@@ -33,7 +36,6 @@ function Sensor() {
 
     const map = useMapEvents({
         click(e) {
-        //   fix me here!!!!
           (draggable ? place.setLatLng(e.latlng): console.log('cant move buster'))
         },
       })
@@ -48,6 +50,7 @@ function Sensor() {
         startAngle={70}
         stopAngle={180}
         >
+        {/* {console.log('in the semi-circle')} */}
         <Popup minWidth={90}>
           <span onClick={toggleDraggable}>
             {draggable

@@ -1,46 +1,52 @@
 import {  Marker, useMapEvents, } from 'react-leaflet'
-import { useState} from "react";
-import Dragable from './Dragable';
-
+import { useState, useEffect} from "react";
+import Draggable from './Draggable';
+import Sensor from './Sensor';
 
 function AddMarkerToClick() {
 
     const [markers, setMarkers] = useState([]);
-  
+    const [sensors, setSensors] = useState([]);
+    const [sensersOn,setSensorsOn] = useState(true)
+    
     const map = useMapEvents({
       click(e) {
-        const newMarker = e.latlng
-        setMarkers([...markers, newMarker]);
-        console.log(newMarker)
+        {sensersOn ? setSensors(prev =>[...prev,e.latlng]): setMarkers(prev => [...prev, e.latlng])}
+        // if (sensersOn){
+        //   console.log('1st')
+        //   const newSensor = e.latlng
+        //   console.log('2nd')
+        //   setSensors(prev =>[...prev, newSensor]);
+        //   console.log('3rd')
+        // }else {
+        //   const newMarker = e.latlng
+        //   setMarkers([...markers, newMarker]);
+
+        //   // console.log(newMarker)
+        // }  
       },
     })
-    const greenOptions = { color: 'green', fillColor: 'green' }
+
+    useEffect(() => {
+      console.log(markers)
+
+    });
+    // const greenOptions = { color: 'green', fillColor: 'green' }
     return (
       <>
+      <>
         {markers.map(marker => 
-        // {const [a,b,c,d] = Dragable(marker)}
-
-        <>
-      {/* <Marker {a} {b} {c} {d}  ></Marker> */}
-
-
-         <Dragable Makr= {Marker}center={marker}>
-
-         </Dragable>
-    
-          {/* <Marker key={marker} 
-          position={marker}
-          >
-          <Popup>Marker is at {marker.lat}
-          </Popup>
-            <Circle
-            center={marker}
-            pathOptions={greenOptions}
-            radius={100}
-          />
-          </Marker> */}
-          </>
+         <Draggable center={marker}>
+         </Draggable>
         )}
+        </>
+        <>
+         {sensors.map((sensor, i) => 
+         <Sensor key= {i} center={sensor}>
+           {/* {console.log('in the map')} */}
+         </Sensor>
+        )}
+        </>
       </>
     )
   }

@@ -1,9 +1,9 @@
 import { useState, useRef, useMemo, useCallback} from "react";
-import { Popup } from 'react-leaflet'
+import { Popup, Marker } from 'react-leaflet'
 
 
   
-  function Draggable({Makr,center}) {
+  function Draggable({center}) {
     
     const [draggable, setDraggable] = useState(false)
     const [position, setPosition] = useState(center)
@@ -28,7 +28,7 @@ import { Popup } from 'react-leaflet'
     //         position={position},
     //         ref={markerRef}])
     return (
-      <Makr
+      <Marker
         draggable={draggable}
         eventHandlers={eventHandlers}
         position={position}
@@ -41,7 +41,7 @@ import { Popup } from 'react-leaflet'
               : 'Click here to make marker draggable'}
           </span>
         </Popup>
-      </Makr>
+      </Marker>
     )
   }
   
