@@ -1,6 +1,6 @@
 import {  Marker, useMapEvents, } from 'react-leaflet'
 import { useState} from "react";
-import Draggable from './Dragable';
+import Dragable from './Dragable';
 
 
 function AddMarkerToClick() {
@@ -15,14 +15,18 @@ function AddMarkerToClick() {
       },
     })
     const greenOptions = { color: 'green', fillColor: 'green' }
-
     return (
       <>
         {markers.map(marker => 
-        <>
-         <Draggable Makr= {Marker}center={marker}>
+        // {const [a,b,c,d] = Dragable(marker)}
 
-         </Draggable>
+        <>
+      {/* <Marker {a} {b} {c} {d}  ></Marker> */}
+
+
+         <Dragable Makr= {Marker}center={marker}>
+
+         </Dragable>
     
           {/* <Marker key={marker} 
           position={marker}

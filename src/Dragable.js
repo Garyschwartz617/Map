@@ -23,6 +23,10 @@ import { Popup } from 'react-leaflet'
       setDraggable((d) => !d)
     }, [])
   
+    // return ([draggable={draggable},
+    //         eventHandlers={eventHandlers},
+    //         position={position},
+    //         ref={markerRef}])
     return (
       <Makr
         draggable={draggable}

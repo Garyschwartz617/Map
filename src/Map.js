@@ -2,7 +2,7 @@ import { useState,useEffect} from "react";
 import { MapContainer, TileLayer, useMapEvents, Polygon, LayersControl } from 'react-leaflet'
 import './App.css';
 import AddMarkerToClick from "./AddMarkerToClick";
-import Mark from "./Mark";
+import Sensor from "./sensor";
 const Map = () => {
 
     const [lat, setLat] = useState(32.0853);
@@ -50,7 +50,7 @@ const Map = () => {
       return (
         <div>
         <MapContainer id="map" center={[lat, lng]} zoom={13} scrollWheelZoom={false} >
-            <LayersControl position="topright"> */}
+            <LayersControl position="topright"> 
                 <LayersControl.BaseLayer checked name="OpenStreetMap.Mapnik"> 
                     <TileLayer
         
@@ -90,7 +90,7 @@ const Map = () => {
         </LayersControl>
         <AddMarkerToClick />
         <MyComponent />
-        {/* <Mark /> */}
+        <Sensor />
         <Polygon pathOptions={purpleOptions} positions={polygon} />
       </MapContainer>
       {/* <button id='hello' className='bttn' onClick={handleClick}>Hello</button> */}
