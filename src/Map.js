@@ -1,5 +1,5 @@
 import { useState,useEffect} from "react";
-import { MapContainer, TileLayer, useMapEvents, Polygon, LayersControl } from 'react-leaflet'
+import { MapContainer, TileLayer, useMapEvents, LayersControl } from 'react-leaflet'
 import './App.css';
 import AddMarkerToClick from "./AddMarkerToClick";
 import Sensor from "./Sensor";
@@ -20,12 +20,11 @@ const Map = () => {
     // let google4 = ['&copy; <a href="https://maps.google.com/">GoogleMaps</a>" ',"http://{s}.google.com/vt/lyrs=s,h&x={x}&y={y}&z={z}",domain]
 
     // const [layer, setLayer] = useState(google1)
- 
-    // const handleClick = () => {
-        
-    //     setLayer(google1)
-    //     console.log(layer)
-    // }        
+    const [bool, setBool] = useState(true);
+
+    const handleClick = () => {
+        {bool ? setBool(false) : setBool(true)}
+    }        
 
     function MyComponent() {
         const map = useMapEvents({
@@ -82,11 +81,11 @@ const Map = () => {
         />
       </LayersControl.BaseLayer>
         </LayersControl>
-        <AddMarkerToClick />
+        <AddMarkerToClick answer = {bool} />
         <MyComponent />
         {/* <Sensor /> */}
       </MapContainer>
-      {/* <button id='hello' className='bttn' onClick={handleClick}>Hello</button> */}
+      <button id='hello' className='bttn' onClick={handleClick}>{bool ? 'Change to Marker' : 'Change to Vector'}</button>
       <div className='coordinates'>Lattitude-{latit} , Longitude-{langi}</div>  
       </div>
     );
