@@ -5,13 +5,15 @@ import React from "react";
 
 
 
-function Sensor({center , ans }) {
+function Sensor({center , ans , info, sensid}) {
     // let center = [32.08, 34.78]
     const semiCircleRef = React.useRef();
     const [draggable, setDraggable] = useState(false)
-    const [position, setPosition] = useState([center.lat, center.lng])
+    const [position, setPosition] = useState([center[0].lat, center[0].lng])
     const [place,setPlace] = useState()
     const [radius, setRadius] = useState(100)
+    const [startAngle, setStartAngle] = useState(center[1])
+    const [stopAngle, setStopAngle] = useState(center[2])
 
     const eventHandlers = useMemo(
         () => ({
@@ -53,7 +55,15 @@ function Sensor({center , ans }) {
     }   
 
     useEffect(() => {
-   
+        if(info != null){
+            if (info[0] == sensid){
+                semiCircleRef.current.setStartAngle(info[1]);
+                semiCircleRef.current.setStopAngle(info[2]);
+                if(info[3]){
+                    semiCircleRef.current.setRadius(info[3]);
+                }
+            }
+        }
       });
 
     return (
@@ -63,8 +73,8 @@ function Sensor({center , ans }) {
         position={position}
         ref={semiCircleRef}
         radius={radius}
-        startAngle={70}
-        stopAngle={180}
+        startAngle={startAngle}
+        stopAngle={stopAngle}
         >
         {/* {console.log('in the semi-circle')} */}
         <Popup minWidth={90}>
@@ -86,29 +96,3 @@ function Sensor({center , ans }) {
 
 export default Sensor;
 
-
-
-
-  
-//   function Draggable({Makr,center}) {
-    
-  
-//     return (
-//       <Makr
-//         draggable={draggable}
-//         eventHandlers={eventHandlers}
-//         position={position}
-//         ref={markerRef}
-//         >
-//         <Popup minWidth={90}>
-//           <span onClick={toggleDraggable}>
-//             {draggable
-//               ? 'Marker is draggable'
-//               : 'Click here to make marker draggable'}
-//           </span>
-//         </Popup>
-//       </Makr>
-//     )
-//   }
-  
-//   export default Draggable;

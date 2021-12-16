@@ -36,6 +36,19 @@ const Map = () => {
         return null;
       }
 
+      const [angleId, setAngleId] = useState(0)
+      const [radi, setRadi] = useState(20)
+      const [strt, setStart] = useState(90)
+      const [end, setEnd] = useState(180)
+      const [angleInfo, setAngleInfo] = useState(null)
+      const editAngle = (e) => {
+        e.preventDefault();
+      // console.log(strt,end,angleId)
+      console.log('inmap')
+      setAngleInfo([angleId,strt,end])
+
+  
+    }
   
     useEffect(() => {
       });
@@ -81,12 +94,40 @@ const Map = () => {
         />
       </LayersControl.BaseLayer>
         </LayersControl>
-        <AddMarkerToClick answer = {bool} />
+        <AddMarkerToClick answer = {bool} inf={angleInfo}/>
         <MyComponent />
         {/* <Sensor /> */}
       </MapContainer>
       <button id='hello' className='bttn' onClick={handleClick}>{bool ? 'Change to Marker' : 'Change to Vector'}</button>
       <div className='coordinates'>Lattitude-{latit} , Longitude-{langi}</div>  
+      <form  className='btt' >
+                <label >Which ID?</label>
+                <input 
+                type="text" 
+                required
+                // value='input id number'
+                onChange={(e) => setAngleId(e.target.value)}
+                />
+                <input 
+                type="text" 
+                required
+                // value='Angle to start at'
+                onChange={(e) => setStart(e.target.value)}
+                />
+                <input 
+                type="text" 
+                required
+                // value='Angle to end at'
+                onChange={(e) => setEnd(e.target.value)}
+                />
+                    <input 
+                type="text" 
+                required
+                // value='Angle to end at'
+                onChange={(e) => setRadi(e.target.value)}
+                />
+                <button onClick={editAngle}></button>
+            </form>
       </div>
     );
 }
