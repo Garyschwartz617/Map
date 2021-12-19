@@ -1,10 +1,10 @@
-import {  useMapEvents, } from 'react-leaflet'
+import {  useMapEvents, useMap , LayerGroup} from 'react-leaflet'
 import { useState, useEffect} from "react";
-import Draggable from './Draggable';
+import Markers from './Markers';
 import Sensor from './Sensor';
 import './App.css';
 
-function AddMarkerToClick({answer ,inf}) {
+function AddToClick({answer ,inf}) {
 
     const [markers, setMarkers] = useState([]);
     const [sensors, setSensors] = useState([]);
@@ -16,35 +16,52 @@ function AddMarkerToClick({answer ,inf}) {
         if (answer){
           const newSensor = [e.latlng,300,90]
           setSensors(prev =>[...prev, newSensor]);
-          console.log(sensors)
-        }else {
+          // console.log(Sensor[1])
+        // }else if (Sensor[1]){
+
+        } else{
           const newMarker = e.latlng
           setMarkers([...markers, newMarker]);
-          console.log('marker')
         }  
       },
     })
 
+    const handleClick = () => {
+      if(inf != null){
+        if (inf[2] == inf[1]){
+           markers.splice([inf[0]],1)
+           sensors.splice([inf[0]],1)
+        } 
+    }
+
+
+  }    
+
     useEffect(() => {
+      handleClick()
     });
-    // const greenOptions = { color: 'green', fillColor: 'green' }
+
     return (
       <>
       
         {markers.map((marker, i) => 
-         <Draggable key= {i} center={marker} ans={answer}>
-         </Draggable>
+         <LayerGroup>
+         <Markers key= {i} center={marker} ans={answer} info={inf} markId={i}>
+
+         </Markers>
+         </LayerGroup>
         )}
        
          {sensors.map((sensor, i) => 
+         <LayerGroup>
          <Sensor key= {i} center={sensor} info={inf} sensid={i}>
-           {/* {console.log('in the map')} */}
          </Sensor>
+         </LayerGroup>
         )}
-       
+
       </>
     )
   }
 
-  export default AddMarkerToClick;  
+  export default AddToClick;  
 

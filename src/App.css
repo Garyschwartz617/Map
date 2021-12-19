@@ -11,6 +11,14 @@
 
 }
 
+.rem {
+  z-index: 999;
+  position: absolute;
+  top: 300px;
+  right: 200px;
+
+}
+
 .coordinates{
   z-index: 999;
   position: absolute;
